@@ -44,7 +44,7 @@ def ss1():
 
 @app.route('/getTime') #endpoint
 def get_time():
-    return json_response(data={"hello":"cary",
+    return json_response(data={"hello":"danny",
                                 "class" : "cis44",
                                 "serverTime":str(datetime.datetime.now())
                             }
