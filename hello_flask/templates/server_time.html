@@ -1,17 +1,69 @@
 <!DOCTYPE html>
 <html>
-    <head>
+<head>
+<link href="http://fonts.cdnfonts.com/css/halloween-spooky" rel="stylesheet">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.img-container {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.blink-text{
+		color: #0000;
+		font-weight: bold;
+		font-size:10rem;
+		animation: blinkingText 2s infinite;
+		text-align: center;
+	}
+	@keyframes blinkingText{
+		0%		{ color: #10c018;}
+		25%		{ color: #1056c0;}
+		50%		{ color: #ef0a1a;}
+		75%		{ color: #254878;}
+		100%	{ color: #04a1d5;}
+	}
+</style>
+
         <!-- head definitions go here -->
 	 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    </head>
-    <body>
-	            <script>
 
+    </head>
+    <body style="background-color:orange;">
+	            <script>
+	
                			 setInterval( function(){ $('#mytime').html( "Client Time is " + new Date());}, 500);
 				 setInterval( function(){ $('#hello').html( "hello");}, 500);
         	</script>
+		
 	    <h1 id="mytime"></h1>
-	    <h2 id="hello"> </h2>
+	  
 	    <h1>Server Time is {{server_time}}</h1>
-    </body>
+	    <div class="blink-text">COUNTDOWN TO HALLOWEEN</div>
+
+<div class="clearfix">
+  <div class="img-container">
+  
+     <h2>Costume Expectation</h2>
+     <img src="https://i.imgur.com/EBMk3F0.jpeg" style ="width:100%"</img>
+
+  </div>
+    <div class="img-container">
+    <h2>Costume Reality</h2>
+    <img src="https://i.imgur.com/DBqJXI7.jpeg" style ="width:100%"</img>
+
+  </div>
+</div>
+
+
+</body>
 </html>
