@@ -6,43 +6,51 @@
     <body>
 
 	    <script>
-		function check_form(){
-
-			alert($('#username').val());
-			alert($('#password').val());
-
-			$('#singup').hide();
-			$('#books').show();
-
-			$('#books').append('<option value="volvo">Thank you Taco</option>')
+		$('#signup').show()
+                $('#login').hide()
 
 
-			return true;
-
-			if($('#username').val().length == 0){
-				return false;
-			}else{
-				return true;
-			}
+		$.getJSON(function(page)){
+        	if(page['page'] == "SignUpPage"){
+            	$('#signup').show()
+            	$('#login').hide()
 		}
+
+		else if(page['page'] == "LoginPage"){
+            	$('#login').show()
+            	$('#signup').hide();
+		}
+		
+
+		function swaplogin(){
+        		$('#loginForm').toggle();
+        		$('#signupForm').toggle();
+    		}
+
 
 	</script>
 
             <div id="signup">
 	    	<form action="/signup" method="post">
   			<label for="username">User Name:</label><br>
-  				<input type="text" id="username" name="username" value="danny"><br>
+  				<input type="text" id="username" name="username" value=""><br>
   			<label for="password">Password:</label><br>
-  				<input type="password" id="password" name="password" value="password"><br><br>
-  			<input type="submit" value="Signup" onclick="return check_form();">
-		</form>
-
-		 <div id="books" style="display:none">
-		    <h1>Buy me</h1>
-		    <select name="books" id="books">
-
-  		    </select>
+  				<input type="password" id="password" name="password" value=""><br><br>
+  			<input type="submit" value="Signup" onclick="swapLogin();">
 	    </div>
+	
+
+	   <div id="login">
+        	<p >Sign into your account.</p>
+          	<form action="/login" method="post" >
+         		<label for="username" id="username">Username:</label>
+         		<input type="text" id="user" name="username"><br><br>
+         		<label for="password" id="password">Password:</label>
+         		<input type="password" id="psw" name="password"><br><br>
+			<input type="submit" value="Login" onclick="swapLogin();">
+        	</form>
+      	</div>
+
 
     </body>
 </html>

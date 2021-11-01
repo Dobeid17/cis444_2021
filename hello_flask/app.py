@@ -110,53 +110,25 @@ def bookstore():
             bookList.append(book)
     return json_response(bookList=books)
 
-@app.route('/user', methods =['GET'])
-def user(current_user):
-    # querying the database
-    # for all the entries in it
-    user = users.query.all()
-    # converting the query objects
-    # to list of jsons
-    output = []
-    for user in users:
-        # appending the user data json
-        # to the response list
-        output.append({
-            'user_id': users.user_id,
-            'name' : users.username,
-            'password' : users.password
-        })
-  
-    return jsonify({'users': output})
 
 
 
-@app.route('/userAuth' , methods =['POST'])  #endpoint
-def userAuth():
-    auth = request.form 
+@app.route('/login' , methods =['POST' , 'GET'])  #endpoint
+def login():
+    global token
+    cur = global_db_con.cursor()
+    jwt_user = jwt.encode({'username':request.form['username']}, JWT_SECRET, algorithm="HS256")
+    hashPass == cur.fetchone()[2]
+    cur.execute("select * from users where username = '" + jwt_user + "';")
 
-    if not auth or not auth.get('username') or not auth.get('password'):
-        # returns 401 if any email or / and password is missing
-        return make_response(
-            'Could not verify',
-            401,
-            {'WWW-Authenticate' : 'Basic realm ="Login required !!"'}
-        )
-    user = users.query\
-        .filter_by(password = auth.get('password'))\
-        .first()
+    if bcrypt.checkpw(bytes(request.form['password'], 'utf-8'), bytes(hashPass, 'utf-8')):
+        return json_response(jwt)
+    
 
-
-    if user.password and auth.password =='password':
-        jwt_token = jwt.encode({
-            'user_id': users.id,
-            'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes = 60)
-         }, app.config['JWT_SECRET'])
-
-        return jsonify({'jwt_token' : jwt_token.decode(jwt_token, JWT_SECRET, algorithms=["HS256"])})
+    
 
 
-@app.route('/signup' , methods =['POST'])  #endpoint
+@app.route('/signup' , methods =['POST' , 'GET'])  #endpoint
 def signup():
     global token
     jwt_token = jwt.encode({'username':request.form['username']}, JWT_SECRET, algorithm="HS256")
@@ -169,7 +141,7 @@ def signup():
     if checkName == None:
         salted = bcrypt.hashpw( bytes(request.form['password'] , 'utf-8') , bcrypt.gensalt(12))
         decryptSalt = salted.decode('utf-8')
-        print (decryptSalt)
+        #print (decryptSalt)
         cur.execute(f"insert into users(user_id, username ,password)  values(001, '{username}','{decryptSalt}');")
         cur = global_db_con.cursor()
         global_db_con.commit()
