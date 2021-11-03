@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,make_response, jsonify
+from flask import Flask,render_template,request,make_response, jsonify,redirect
 from flask_json import FlaskJSON, JsonError, json_response, as_json
 import jwt
 
@@ -21,6 +21,8 @@ IMGS_URL = {
 CUR_ENV = "PRD"
 JWT_SECRET = None
 token = None
+message = None
+boughtMessage = 0
 
 global_db_con = get_db()
 
@@ -32,9 +34,6 @@ with open("secret", "r") as f:
 def index():
     return 'Web App with Python Caprice!' + USER_PASSWORDS['cjardin']
 
-@app.route('/buy') #endpoint
-def buy():
-    return 'Buy'
 
 @app.route('/hello') #endpoint
 def hello():
@@ -101,14 +100,9 @@ def hellodb():
 @app.route('/bookstore' , methods=['GET']) #endpoint
 def bookstore():
     cur = global_db_con.cursor()
-    cur.execute("Select books")
+    cur.execute("Select * from  books")
     books = cur.fetchall()
-    if books == None:
-        return "No books in table"
-    else:
-        for book in books:
-            bookList.append(book)
-    return json_response(bookList=books)
+    return json_response(myBooks=books)
 
 
 
@@ -118,35 +112,53 @@ def login():
     global token
     cur = global_db_con.cursor()
     jwt_user = jwt.encode({'username':request.form['username']}, JWT_SECRET, algorithm="HS256")
-    hashPass == cur.fetchone()[2]
-    cur.execute("select * from users where username = '" + jwt_user + "';")
+    print("LOGIN: " + jwt_user)
+    cur.execute("select * from users where username ='" + jwt_user + "';")
+    #print(cur.fetchone())
+    result = cur.fetchone()
+    print("LOGIN PASS: " +request.form['password'])
+    if result is None:
+        print("INVALID")
+    else:
+        cur.execute("select * from users where username = '" + jwt_user + "';")
+        #print(cur.fetchone())
+        hashPass = cur.fetchone()[2]
+        print(hashPass)
+        print(bytes(hashPass, 'utf-8'))
+        if bcrypt.checkpw(bytes(request.form['password'], 'utf-8'), bytes(hashPass, 'utf-8')):
+            token = jwt_user
+            return redirect(request.referrer)
+        else:
+            return json_reponse(message2 = "fail")
+        #return json_response(jwt_user)
 
-    if bcrypt.checkpw(bytes(request.form['password'], 'utf-8'), bytes(hashPass, 'utf-8')):
-        return json_response(jwt)
-    
-
-    
 
 
 @app.route('/signup' , methods =['POST' , 'GET'])  #endpoint
 def signup():
-    global token
+    
+    global message
     jwt_token = jwt.encode({'username':request.form['username']}, JWT_SECRET, algorithm="HS256")
-
+    jwt_user = jwt.encode({'username':request.form['username']}, JWT_SECRET, algorithm="HS256")
+    print("SIGNUP: " + jwt_user)
     username = request.form['username']
     password = request.form['password']
+    print("SIGNUP PASSWORD: " + password)
     cur = global_db_con.cursor()
-    cur.execute(f"select * from users where username = '(username)';")
-    checkName = cur.fetchone()
-    if checkName == None:
+    cur.execute("select * from users where username = '" + jwt.encode({'username':request.form['username']}, JWT_SECRET, algorithm="HS256") + "';")
+    
+    if cur.fetchone() is None:
+        print("HITTING IF")
+        #cur.execute(f"select * from users where username = '(username)';")
         salted = bcrypt.hashpw( bytes(request.form['password'] , 'utf-8') , bcrypt.gensalt(12))
+        #print("SALTED LOGIN: " + salted)
         decryptSalt = salted.decode('utf-8')
-        #print (decryptSalt)
-        cur.execute(f"insert into users(user_id, username ,password)  values(001, '{username}','{decryptSalt}');")
-        cur = global_db_con.cursor()
+        print ("DECRYPT SALT: " + decryptSalt)
+        cur.execute(f"insert into users(user_id, username ,password)  values(001, '{jwt_user}','{decryptSalt}');")
+        #cur = global_db_con.cursor()
         global_db_con.commit()
-        token = jwt_token
-        return jsonify(token)
+        message = "Signed Up"
+        return redirect(request.referrer)
     else:
         print("Username already exists")
         return make_response(
@@ -154,9 +166,33 @@ def signup():
                 401,
                 {'WWW-Authenticate' : 'Basic realm ="User doesnt exist !!"'})
 
+@app.route('/getStatus')
+def getStatus():
+    global message
+    return json_response(message=message)
+
+@app.route('/getToken')
+def getToken():
+    global token
+    return json_response(token=token)
+#does nothing rn since token is set to none
+
+@app.route('/buy' , methods=['POST'])
+def buy():
+   global boughtMessage
+   boughtMessage = 1
+   cur = global_db_con.cursor()
+   cur.execute(f"select user_id from users where username = '{token}'")
+   userID = cur.fetchone()[0]
+   cur.execute(f"insert into bought values({userID} , '{request.form['book_name']}', '{request.form['price']}');")
+   global_db_con.commit()
+   return redirect(request.referrer)
 
 
-
+@app.route('/getsBought')
+def getsBought():
+     global boughtMessage
+     return json_response(isBought = boughtMessage)
 
 app.run(host='0.0.0.0', port=80)
 
