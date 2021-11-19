@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	     <script src="https://code.jquery.com/jquery-3.6.0.js" 
+		     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	     <script src="/static/cis444.js"></script>
+    </head>
+    <body>
+
+	<script>
+		function send_form(){
+			$.post("/open_api/login", { "firstname":$('#fname').val(), "password":$('#password').val()},
+                       		function(data, textStatus) {
+					//this gets called when browser receives response from server
+					console.log(data.token);
+					//Set global JWT
+					jwt = data.token;
+					//make secure call with the jwt
+					get_books();
+				}, "json").fail( function(response) {
+					//this gets called if the server throws an error
+					console.log("error");
+					console.log(response);
+				});
+			return false;
+		}
+
+		function get_books(){
+			 //make secure call with the jwt
+			secure_get_with_token("/secure_api/get_books", {} , function(data){
+					console.log("got books"); 
+					console.log(data); 
+					$('#buybook').show();
+					},
+                                                function(err){ console.log(err) });
+		}
+                function buy_book(book_id){
+                         //make secure call with the jwt
+                        secure_get_with_token("/secure_api/get_books", {"book_id" : book_id} , function(data){console.log("got books"); console.log(data)},
+                                                function(err){ console.log(err) });
+                }
+
+	</script>
+	<div id="signup">
+	    	<form action="/signup" method="post">
+  			<label for="username">User Name:</label><br>
+  				<input type="text" id="username" name="username" value=""><br>
+  			<label for="password">Password:</label><br>
+  				<input type="password" id="password" name="password" value=""><br><br>
+  			<input type="submit" value="Signup">
+		</form>
+
+	    </div>
+
+
+
+	   <div id="login">
+        	<p >Sign into your account.</p>
+          	<form action="/login" method="post" >
+         		<label for="username" id="username">Username:</label>
+         		<input type="text" id="user" name="username"><br><br>
+         		<label for="password" id="password">Password:</label>
+         		<input type="password" id="psw" name="password"><br><br>
+			<input type="submit" value="Login">
+
+        	</form>
+      	</div>
+
+
+        <div class="bookContain" id="bookstore" style="display:none;">
+			<div id="col1">
+				<img src="https://i.imgur.com/sfzhlxh.jpeg" alt="Lord of the Rings Fellowship of the Ring" id="fellowship">
+				<h3 id="bname1"></h3>
+				<p id="bprice1"></p>
+				<form action="/buy" method="post">
+                                        <button id="buyButton1"  type="submit">Buy Book</button>
+                                        <input id="bn1" name="book_name" type="hidden" value="">
+                                        <input id="bp1" name="price" type="hidden" value="">
+				</form>
+			</div>
+			<div id="col2">
+				<img src="https://i.imgur.com/mBVPlbL.jpeg" alt="Lord of the Rings Two Towers" id="twoTowers">
+				<h3 id="bname2"></h3>
+                                <p id="bprice2"></p>
+                                <form action="/buy" method="post">
+					<button id="buyButton2"  type="submit">Buy Book</button>
+                                        <input id="bn2" name="book_name" type="hidden" value="">
+                                        <input id="bp2" name="price" type="hidden" value="">
+				</form>
+			</div>
+			<div id="col3">
+				<img src="https://i.imgur.com/fAuH3Gg.jpeg" alt="Lord of the Rings Return of the King" id="king">
+                                <h3 id="bname3"></h3>
+                                <p id="bprice3"></p>
+				<form action="/buy" method="post">
+					<button id="buyButton3"  type="submit">Buy Book</button>
+					<input id="bn3" name="book_name" type="hidden" value="">
+                			<input id="bp3" name="price" type="hidden" value="">
+				</form>
+                        </div>
+			 <div id="col4">
+                                <img src="https://i.imgur.com/xtaPSFr.jpeg" alt="The Hobbit" id="hobbit">
+                                <h3 id="bname4"></h3>
+                                <p id="bprice4"></p>
+                                <form action="/buy" method="post">
+                                        <button id="buyButton4"  type="submit">Buy Book</button>
+                                        <input id="bn4" name="book_name" type="hidden" value="">
+                                        <input id="bp4" name="price" type="hidden" value="">
+                                </form>
+                        </div>
+
+	</div>
+
+
+
+    </body>
+     <script>
+	         $.getJSON("/getsBought", function(book)
+                      {
+                              if (book.isBought)
+                                      alert("BOUGHT")
+                      })
+
+
+
+	     	$.getJSON('/getStatus', function(myStatus){
+                //if jwt_token is valid, get bookstore
+			console.log("HELLO IF STATEMENT: "+ myStatus.message)
+                        if (myStatus.message != null){
+                                $('#login').show()
+				$('#signup').hide()
+                                console.log("TESTING")
+
+                        }
+			else{
+				$('#login').hide()
+                		$('#signup').show()
+				$('#bookstore').hide()
+			}
+                })
+
+		$.getJSON('/getToken', function(myToken){
+                //if jwt_token is valid, get bookstore
+                        console.log(myToken.token)
+                        if (myToken.token != null){
+                                $('#login').hide()
+                                $('#bookstore').show()
+                                $('#signup').hide()
+
+                                console.log("TESTING")
+
+                        }
+                })
+
+		console.log("HELLOOOO")
+
+                function swaplogin(){
+                        $('#loginForm').toggle();
+                        $('#signupForm').toggle();
+                }
+
+		console.log("HELLOOOO GET BOOKS")
+
+
+                $.getJSON("/bookstore", function(myBooks)
+
+                        {
+                                var arrLength = 4;
+                                var allBooks = [arrLength];
+                                for (var i = 0; i < myBooks.myBooks.length; i++) {
+                                        var object = myBooks.myBooks[i];
+                                        allBooks[i] = object;
+                                        for (property in object) {
+                                                var value = object[property];
+                                        }
+                                }
+				console.log(myBooks.myBooks)
+                                $('#bname1').html(allBooks[0][1]);
+                                $('#bname2').html(allBooks[1][1]);
+                                $('#bname3').html(allBooks[2][1]);
+                                $('#bname4').html(allBooks[3][1]);
+                                $('#bprice1').html('$' + allBooks[0][2]);
+                                $('#bprice2').html('$' + allBooks[1][2]);
+                                $('#bprice3').html('$' + allBooks[2][2]);
+                                $('#bprice4').html('$' + allBooks[3][2]);
+
+
+                                $('#bn1').val(allBooks[0][1]);
+                                $('#bn2').val(allBooks[1][1]);
+                                $('#bn3').val(allBooks[2][1]);
+                                $('#bn4').val(allBooks[3][1]);
+
+                                $('#bp1').val(allBooks[0][2]);
+                                $('#bp2').val(allBooks[1][2]);
+                                $('#bp3').val(allBooks[2][2]);
+                                $('#bp4').val(allBooks[3][2]);
+                        })
+
+        </script>
+</html>
