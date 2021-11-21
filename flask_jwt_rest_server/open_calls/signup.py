@@ -24,7 +24,7 @@ def handle_request():
     if cur.fetchone() is None:
         salted = bcrypt.hashpw( bytes(password_from_user_form, 'utf-8'),  bcrypt.gensalt(12))
         dbQuery = sql.SQL("insert into {table} ({field1} , {field2}) values (%s , %s);").format(table = sql.Identifier('users'), field1 = sql.Identifier('username'),field2 = sql.Identifier('password'))
-        cur.execute(dbQuery, (user['sub'], salted.decode('utf-8')))
+        cur.execute(dbQuery, (user['sub'], salted.decode('utf-8'),))
         db.commit()
         return json_response(message="Successfully created account.")
     else:

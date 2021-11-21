@@ -27,20 +27,24 @@ function secure_get_with_token(endpoint, data_to_send, on_success_callback, on_f
 }
 
 function signup(){
-	$.post("/open_api/signup", { "username": $('#newUser').value(), "passsword":$('#newPass').value() }, function(signup){
+	console.log("Signing up")
+	$.post("/open_api/signup", { "username": $('#newUser').value(), "password":$('#newPass').value() }, function(signup){
 	console.log("success");
 
 	}, "json").fail( function(response) {
         //this gets called if the server throws an error
         console.log("error");
         console.log(response);
-        });}
-		return false;
+        });
+	//return false;
 }
 
 function login(){
-        $.post("/open_api/login", { "username": $('#user').value(), "passsword":$('#pass').value() }, function(data){
+	console.log("LOGGING IN")
+        $.post("/open_api/login", { "username": $('#user').value(), "password":$('#pass').value() }, function(data){
 	jwt = data.token;
+	console.log("LOGIN TEST");
+	console.log(jwt);
 	getBooks();
 	}, "json").fail( function(response) {
 	//this gets called if the server throws an error
@@ -48,7 +52,7 @@ function login(){
 	console.log(response);
 	});
 	
-
+	return false;
 }
 
 function getBooks(){
