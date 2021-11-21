@@ -1,5 +1,5 @@
 var jwt = null
-
+console.log("ARE YOU EVEN HERE")
 function swaplogin() {
 	$('#loginForm').toggle();
 	$('#signupForm').toggle();
