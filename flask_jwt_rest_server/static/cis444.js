@@ -94,9 +94,14 @@ $('#loginForm').hide();
 $('#bookstore').show();
 }
 
+console.log("BEFORE BUYING")
+
 function buy(){
-	secure_get_with_token("/secure_api/buy_books", {"book_name":$('book_name').val(),"book_price":$('book_price').val()},
+	data = {"book_name" : $('book_name').val() , "price": $('price').val()}
+	console.log(data)
+	secure_get_with_token("/secure_api/buy", {'data': data},
 		function(data){
+		console.log(data)
                 console.log("buying books");
 		},
 		function(err){
