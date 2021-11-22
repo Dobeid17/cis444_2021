@@ -94,6 +94,16 @@ $('#loginForm').hide();
 $('#bookstore').show();
 }
 
+function buy(){
+	secure_get_with_token("/secure_api/buy_books", {"book_name":$('book_name').val(),"book_price":$('book_price').val()},
+		function(data){
+                console.log("buying books");
+		},
+		function(err){
+			console.log(err)
+		});
+	return false;
+}
 
 
 
