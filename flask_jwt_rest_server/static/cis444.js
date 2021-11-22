@@ -25,10 +25,11 @@ function secure_get_with_token(endpoint, data_to_send, on_success_callback, on_f
 		beforeSend: setHeader
 	});
 }
+console.log("BEFORE SIGNUP")
 
 function signup(){
 	console.log("Signing up")
-	$.post("/open_api/signup", { "username": $('#newUser').value(), "password":$('#newPass').value() }, function(signup){
+	$.post("/open_api/signup", { "username": $('#newUser').val(), "password":$('#newPass').val() }, function(signup){
 	console.log("success");
 
 	}, "json").fail( function(response) {
@@ -38,10 +39,11 @@ function signup(){
         });
 	return false;
 }
+console.log("BEFORE LOGIN")
 
 function login(){
 	console.log("LOGGING IN")
-        $.post("/open_api/login", { "username": $('#logUser').value(), "password":$('#logPass').value() }, function(data){
+        $.post("/open_api/login", { "username": $('#logUser').val(), "password":$('#logPass').val() }, function(data){
 	jwt = data.token;
 	console.log("LOGIN TEST");
 	console.log(jwt);
