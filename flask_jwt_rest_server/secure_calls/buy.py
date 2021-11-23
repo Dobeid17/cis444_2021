@@ -13,14 +13,9 @@ def handle_request():
     logger.debug("Buy books request")
     
     cur = global_db_con.cursor()
-    book_name = request.args.get('book_name', type=[str])
-    price = request.args.get('book_price', type=[str])
-    
-    data = request.args.get('data')
-    print("LOGGER DATA")
-    logger.debug(data)
-
-    cur.execute(f"insert into bought (book_name , price) values('{book_name}' , {price});")
+    nameOfBook = request.args.get('bookName',type=str)
+    priceOfBook = request.args.get('price',type=str)
+    cur.execute(f"insert into bought (book_name , price) values('{nameOfBook}' , {priceOfBook});")
     global_db_con.commit()
 
     bought = True

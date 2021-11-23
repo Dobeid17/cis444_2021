@@ -96,13 +96,11 @@ $('#bookstore').show();
 
 console.log("BEFORE BUYING")
 
-function buy(){
-	data = {"book_name" : $('book_name').val() , "price": $('price').val()}
-	console.log(data)
-	secure_get_with_token("/secure_api/buy", {'data': data},
+function buyBook1(){
+	secure_get_with_token("/secure_api/buy", {"bookName":$('#bn1').val(), "price":$('#bp1').val()},
 		function(data){
 		console.log(data)
-                console.log("buying books");
+                console.log("buying book one");
 		},
 		function(err){
 			console.log(err)
@@ -110,10 +108,41 @@ function buy(){
 	return false;
 }
 
+function buyBook2(){
+        secure_get_with_token("/secure_api/buy", {"bookName":$('#bn2').val(), "price":$('#bp2').val()},
+                function(data){
+                console.log(data)
+                console.log("buying book two");
+                },
+                function(err){
+                        console.log(err)
+                });
+        return false;
+}
 
+function buyBook3(){
+        secure_get_with_token("/secure_api/buy", {"bookName":$('#bn3').val(), "price":$('#bp3').val()},
+                function(data){
+                console.log(data)
+                console.log("buying book three");
+                },
+                function(err){
+                        console.log(err)
+                });
+        return false;
+}
 
-
-
+function buyBook4(){
+        secure_get_with_token("/secure_api/buy", {"bookName":$('#bn4').val(), "price":$('#bp4').val()},
+                function(data){
+                console.log(data)
+                console.log("buying book four");
+                },
+                function(err){
+                        console.log(err)
+                });
+        return false;
+}
 
 
 
