@@ -10,17 +10,17 @@ function Cards() {
                 <div className='cards__wrapper'>
                     <ul className='cards__items'>
                         <CardItem 
-                        src='images/Lock.jpg'
+                        src='https://i.imgur.com/WN7BQJ3.png' // lock
                         text='My Collection'
                         path='/collection'
                         />
                         <CardItem 
-                        src='images/Star.jpg'
+                        src='https://i.imgur.com/5QPIO8G.jpeg' //star
                         text='Favorites'
                         path='/favorites'
                         />
                         <CardItem 
-                        src='images/Binoculars.jpg'
+                        src='https://i.imgur.com/KmfSqob.jpeg' //binoculars
                         text='Watch List'
                         path='/watch-list'
                         />
