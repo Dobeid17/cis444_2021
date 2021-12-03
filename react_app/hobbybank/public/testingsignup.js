@@ -1,9 +1,9 @@
-import React from 'react';
-import '../../App.css';
-
 var jwt = null
 console.log("ARE YOU EVEN HERE")
-var XMLHttpRequest = require('xhr2');
+function swaplogin() {
+	$('#loginForm').toggle();
+	$('#signupForm').toggle();
+}
 
 function secure_get_with_token(endpoint, data_to_send, on_success_callback, on_fail_callback){
 	xhr = new XMLHttpRequest();
@@ -27,7 +27,7 @@ function secure_get_with_token(endpoint, data_to_send, on_success_callback, on_f
 }
 console.log("BEFORE SIGNUP")
 
-export default function SignUp(){
+function signup(){
 	console.log("Signing up")
 	$.post("/open_api/signup", { "username": $('#newUser').val(), "password":$('#newPass').val() }, function(signup){
 	console.log("success");
@@ -39,6 +39,3 @@ export default function SignUp(){
         });
 	return false;
 }
-
-
-
