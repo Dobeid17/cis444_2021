@@ -6,7 +6,7 @@ import Home from './components/pages/Home';
 import Collection from './components/pages/Collection';
 import Favorites from './components/pages/Favorites';
 import WatchList from './components/pages/WatchList'
-import SignUp from './components/pages/SignUp';
+import SignUp from './components/pages/SignUp.html';
 
 function App() {
     return (

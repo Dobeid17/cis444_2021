@@ -1,13 +1,12 @@
-import React from 'react';
-import '../../App.css';
-import $ from 'jquery';
-import xhr from 'xhr2';
 var jwt = null
-
 console.log("ARE YOU EVEN HERE")
-var XMLHttpRequest = require('xhr2');
+function swaplogin() {
+	$('#loginForm').toggle();
+	$('#signupForm').toggle();
+}
+
 function secure_get_with_token(endpoint, data_to_send, on_success_callback, on_fail_callback){
-	var xhr = new XMLHttpRequest();
+	xhr = new XMLHttpRequest();
 	function setHeader(xhr) {
 		xhr.setRequestHeader('Authorization', 'Bearer:'+jwt);
 	}
@@ -28,7 +27,7 @@ function secure_get_with_token(endpoint, data_to_send, on_success_callback, on_f
 }
 console.log("BEFORE SIGNUP")
 
-export default function SignUp(){
+function signup(){
 	console.log("Signing up")
 	$.post("/open_api/signup", { "username": $('#newUser').val(), "password":$('#newPass').val() }, function(signup){
 	console.log("success");
@@ -38,6 +37,23 @@ export default function SignUp(){
         console.log("error");
         console.log(response);
         });
+	return false;
+}
+console.log("BEFORE LOGIN")
+
+function login(){
+	console.log("LOGGING IN")
+        $.post("/open_api/login", { "username": $('#logUser').val(), "password":$('#logPass').val() }, function(data){
+	jwt = data.token;
+	console.log("LOGIN TEST");
+	console.log(jwt);
+	getBooks();
+	}, "json").fail( function(response) {
+	//this gets called if the server throws an error
+	console.log("error");
+	console.log(response);
+	});
+	
 	return false;
 }
 
