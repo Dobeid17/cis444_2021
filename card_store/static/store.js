@@ -1,5 +1,20 @@
 var jwt = null
 console.log("ARE YOU EVEN HERE")
+function cssTest() {
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+
+signUpButton.addEventListener('click', () => {
+	container.classList.add("right-panel-active");
+});
+
+signInButton.addEventListener('click', () => {
+	container.classList.remove("right-panel-active");
+});
+
+}
+
 function swaplogin() {
 	$('#loginForm').toggle();
 	$('#signupForm').toggle();
@@ -56,6 +71,30 @@ function login(){
 	
 	return false;
 }
+
+function showcards(){
+var allcards = cards;
+
+	$('#pname').html(allcards[0][1]);
+        $('#pname2').html(allcards[1][1]);
+        $('#pname3').html(allcards[2][1]);
+        $('#pname4').html(allcards[3][1]);
+        $('#cprice1').html('$' + allcards[0][2]);
+        $('#cprice2').html('$' + allcards[1][2]);
+        $('#cprice3').html('$' + allcards[2][2]);
+        $('#cprice4').html('$' + allcards[3][2]);
+
+        $('#bn1').val(allcards[0][1]);
+        $('#bn2').val(allcards[1][1]);
+        $('#bn3').val(allcards[2][1]);
+        $('#bn4').val(allcards[3][1]);
+
+        $('#bp1').val(allcards[0][2]);
+        $('#bp2').val(allcards[1][2]);
+        $('#bp3').val(allcards[2][2]);
+        $('#bp4').val(allcards[3][2]);
+}
+
 
 
 

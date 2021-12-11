@@ -4,14 +4,17 @@
 	     <script src="https://code.jquery.com/jquery-3.6.0.js" 
 		     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-
+	<link rel "stylesheet" href="index.css">
     </head>
 
 
     <body>
 
+	   <div class="container" id="container">
+	   <div class="form-container sign-up-container"> 
+	   <div id="signingUp">
+		   <h1>Create Account</h1>
 
-	<div id="signingUp">
 	    	<form>
   			<label for="username">User Name:</label><br>
 			<input type="text" id="newUser" name="username"><br><br>
@@ -21,11 +24,11 @@
 		</form>
 
 	    </div>
+	   </div>
 
-
-
+	   <div class="form-container sign-in-container">
 	   <div id="loggingIn">
-        	<p >Sign into your account.</p>
+		   <h1>Sign into your account.</h1>
 		<form>
          		<label for="username" id="username">Username:</label>
          		<input type="text" id="logUser" name="username"><br><br>
@@ -34,9 +37,34 @@
 			<input type="submit" value="Login" onclick="return login();">
 
         	</form>
-      	</div>
+      	  </div>
+	   </div>
 
+	   <div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<button class="ghost" id="signUp">Sign Up</button>
+		</div>
+		</div>
+	   </div>
+	   </div>
+	
+	  <div id="Adding">
+		  <h1>Lets add to your collection</h1>
+		  <form>
+			  
+			  <input type="text" placeholder="Add Card" value="Add" onclick="return addcard();">
+			  
+		 </form>
 
+	 </div>
 
 
 
