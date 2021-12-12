@@ -62,7 +62,7 @@ function login(){
 	jwt = data.token;
 	console.log("LOGIN TEST");
 	console.log(jwt);
-	getBooks();
+	
 	}, "json").fail( function(response) {
 	//this gets called if the server throws an error
 	console.log("error");
@@ -72,7 +72,24 @@ function login(){
 	return false;
 }
 
-function showcards(){
+function addcard(){
+	console.log("ADD CARD")
+	secure_get_with_token("/secure_api/addcard", {"playername": $('#playername').val() ,"cardmaker": $('#cardmaker').val() ,"number": $('#number').val(), "sport": $('#sport').val(), "grade": $('#grade').val() },
+		function(data){
+	console.log("addcard success")
+	get_cards()
+	
+	}, "json").fail( function(response) {
+        //this gets called if the server throws an error
+        console.log("addcard() error");
+        console.log(response);
+        });
+
+        return false;
+}
+
+
+function get_cards(){
 var allcards = cards;
 
 	$('#pname').html(allcards[0][1]);

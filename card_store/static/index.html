@@ -59,9 +59,23 @@
 	  <div id="Adding">
 		  <h1>Lets add to your collection</h1>
 		  <form>
-			  
-			  <input type="text" placeholder="Add Card" value="Add" onclick="return addcard();">
-			  
+			  <div>
+			  <label for="playername" id="playername">Player Name:</label> 
+			  <input type="text" id="playername" name="playername">
+			  <br><br>
+			  <label for="cardmaker" id="cardmaker">Card Brand:</label>
+                          <input type="text" id="cardmaker" name="cardmaker">
+                          <br><br>
+			  <label for="cardnum" id="cardnum">Card Number:</label>
+                          <input type="text" id="cardnum" name="cardnum">
+                          <br><br>
+			  <label for="sport" id="sport">Sport:</label>
+                          <input type="text" id="sport" name="sport">
+                          <br><br>
+			  <label for="grade" id="grade">Grade:</label>
+                          <input type="text" id="grade" name="grade">
+                          <br><br>
+			  <input type="submit" value="addCard" onclick="return addcard();">
 		 </form>
 
 	 </div>
