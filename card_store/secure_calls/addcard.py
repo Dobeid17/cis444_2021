@@ -13,13 +13,13 @@ def handle_request():
     logger.debug("add cards request")
     
     cur = global_db_con.cursor()
-    playerName = request.args.get('playerName',type=str)
-    cardMake = request.args.get('maker',type=str)
+    playerName = request.args.get('playername',type=str)
+    cardMake = request.args.get('cardmaker',type=str)
+    cardNum = request.args.get('cardnum',type=int)
     cardSport = request.args.get('sport',type=str)
-    cardNum = request.args.get('num',type=int)
     cardGrade = request.args.get('grade',type=int)
 
-    cur.execute(f"insert into cards (playername , cardmaker, number , sport, grade) values('{playerName}' , '{cardMake}' , '{cardSport}' , {cardNum} , {cardGrade} );")
+    cur.execute(f"insert into cards (playername , cardmaker, number , sport, grade) values('{playerName}' , '{cardMake}' , {cardNum} , '{cardSport}' , {cardGrade} );")
     global_db_con.commit()
 
     added = True

@@ -1,4 +1,6 @@
 var jwt = null
+
+
 console.log("ARE YOU EVEN HERE")
 function cssTest() {
 const signUpButton = document.getElementById('signUp');
@@ -16,8 +18,8 @@ signInButton.addEventListener('click', () => {
 }
 
 function swaplogin() {
-	$('#loginForm').toggle();
-	$('#signupForm').toggle();
+	$('#login').toggle();
+	$('#signup').toggle();
 }
 
 function secure_get_with_token(endpoint, data_to_send, on_success_callback, on_fail_callback){
@@ -74,8 +76,8 @@ function login(){
 
 function addcard(){
 	console.log("ADD CARD")
-	secure_get_with_token("/secure_api/addcard", {"playername": $('#playername').val() ,"cardmaker": $('#cardmaker').val() ,"number": $('#number').val(), "sport": $('#sport').val(), "grade": $('#grade').val() },
-		function(data){
+	secure_get_with_token("/secure_api/addcard", {"playername": $('#playername').val() ,"cardmaker": $('#cardmaker').val() ,"number": $('#cardnum').val(), "sport": $('#sport').val(), "grade": $('#grade').val() },
+	function(data){
 	console.log("addcard success")
 	get_cards()
 	
