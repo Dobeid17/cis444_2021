@@ -101,27 +101,43 @@ function addcard(){
 
 
 function get_cards(){
-var allcards = cards;
+	/*
+	var list1 = [];
+	var list2 = [];
+	var list3 = [];
+	var list4 = [];
+	var list5 = [];
 
-	$('#pname').html(allcards[0][1]);
-        $('#pname2').html(allcards[1][1]);
-        $('#pname3').html(allcards[2][1]);
-        $('#pname4').html(allcards[3][1]);
-        $('#cprice1').html('$' + allcards[0][2]);
-        $('#cprice2').html('$' + allcards[1][2]);
-        $('#cprice3').html('$' + allcards[2][2]);
-        $('#cprice4').html('$' + allcards[3][2]);
+	var n = 1;
+	var x = 0;
+	
+	var add_to_list = document.getElementByID('show');
+	var newRow = add_to_list.insertRow(n);
 
-        $('#bn1').val(allcards[0][1]);
-        $('#bn2').val(allcards[1][1]);
-        $('#bn3').val(allcards[2][1]);
-        $('#bn4').val(allcards[3][1]);
+	list1[x] = document.getElementByID("playername").value;
+	list2[x] = document.getElementByID("cardmaker").value;
+	list3[x] = document.getElementByID("number").value;
+	list4[x] = document.getElementByID("sport").value;
+	list5[x] = document.getElementByID("grade").value;
 
-        $('#bp1').val(allcards[0][2]);
-        $('#bp2').val(allcards[1][2]);
-        $('#bp3').val(allcards[2][2]);
-        $('#bp4').val(allcards[3][2]);
+	var cel1 = newRow.insertCell(0);
+	var cel2 = newRow.insertCell(1);
+	var cel3 = newRow.insertCell(2);
+	var cel4 = newRow.insertCell(3);
+	var cel5 = newRow.insertCell(4);
+
+	cel1.innerHTML = list1[x];
+	cel2.innerHTML = list2[x];
+	cel3.innerHTML = list3[x];
+	cel4.innerHTML = list4[x];
+	cel5.innerHTML = list5[x];
+
+	n++;
+	x++;
+*/
 }
+
+
 
 
 
