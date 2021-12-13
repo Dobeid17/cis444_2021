@@ -7,6 +7,6 @@ from tools.logging import logger
 def handle_request():
     logger.debug("Get Cards Handle Request")
     cur = g.db.cursor()
-    cur.execute("select * from cardcollect;")
+    cur.execute("select * from cards;")
     db_cards = cur.fetchall()
     return json_response( token = create_token(  g.jwt_data ) , cards = db_cards)
