@@ -73,7 +73,6 @@ function login(){
 	
 	return false;
 }
-console.log("BEFORE ADD CARD")
 
 function addcard(){
 	console.log("ADD CARD")
@@ -84,19 +83,19 @@ function addcard(){
 	var grade = $('#grade').val()
 	
 	console.log(playername + cardmaker + number + sport + grade)
-
+/*
 	secure_get_with_token("/secure_api/addcard", {'playername': playername ,'cardmaker': cardmaker ,'number': number, 'sport': sport, 'grade': grade },
 	function(data){
 	console.log("addcard success")
 	get_cards()
 	
-	},function(response) {
+	}, "json").fail( function(response) {
         //this gets called if the server throws an error
         console.log("addcard() error");
         console.log(response);
         });
-	setTimeout(function(){ },10000);
-        return false;
+*/
+       
 }
 
 
