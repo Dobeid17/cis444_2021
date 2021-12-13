@@ -76,7 +76,13 @@ function login(){
 
 function addcard(){
 	console.log("ADD CARD")
-	secure_get_with_token("/secure_api/addcard", {"playername": $('#playername').val() ,"cardmaker": $('#cardmaker').val() ,"number": $('#cardnum').val(), "sport": $('#sport').val(), "grade": $('#grade').val() },
+	var playername = $(playername).val
+	var cardmaker = $(cardmaker).val
+	var number = $(number).val
+	var sport = $(sport).val
+	var grade = $(grade).val
+
+	secure_get_with_token("/secure_api/addcard", {"playername": '#playername' ,"cardmaker":'#cardmaker' ,"number": '#number', "sport": '#sport', "grade": '#grade' },
 	function(data){
 	console.log("addcard success")
 	get_cards()

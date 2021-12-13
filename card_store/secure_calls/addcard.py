@@ -15,11 +15,11 @@ def handle_request():
     cur = global_db_con.cursor()
     playerName = request.args.get('playername',type=str)
     cardMake = request.args.get('cardmaker',type=str)
-    cardNum = request.args.get('cardnum',type=int)
+    cardNumber = request.args.get('number',type=int)
     cardSport = request.args.get('sport',type=str)
     cardGrade = request.args.get('grade',type=int)
 
-    cur.execute(f"insert into cards (playername , cardmaker, number , sport, grade) values('{playerName}' , '{cardMake}' , {cardNum} , '{cardSport}' , {cardGrade} );")
+    cur.execute(f"insert into cards (playername , cardmaker, number , sport, grade) values('{playerName}' , '{cardMake}' , {cardNumber} , '{cardSport}' , {cardGrade} );")
     global_db_con.commit()
 
     added = True
