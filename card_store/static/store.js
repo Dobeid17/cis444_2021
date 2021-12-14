@@ -67,7 +67,6 @@ function login(){
 	jwt = data.token;
 	console.log("LOGIN TEST");
 	console.log(jwt);
-//	addcard();
 	}, "json").fail( function(response) {
 	//this gets called if the server throws an error
 	console.log("error");
@@ -89,12 +88,11 @@ function addcard(){
 	var sport = $('#sport').val()
 	var grade = $('#grade').val()
 	
-	console.log(playername + cardmaker + number + sport + grade)
+	get_cards();
 
 	secure_get_with_token("/secure_api/addcard", {'playername': playername ,'cardmaker': cardmaker ,'number': number, 'sport': sport, 'grade': grade },
 	function(data){
 	console.log("addcard success")
-	//get_cards()
 	
 	},function(response) {
         //this gets called if the server throws an error
@@ -107,8 +105,22 @@ function addcard(){
 
 
 function get_cards(){
+secure_get_with_token("/secure_api/get_cards", {}, function(data)
+		{console.log("got cards")
+		loadCards(data.cards);
+	},function(err){console.log(err)}) 
 	
 
+}
+
+function loadCards(cards){
+	var allcards = cards;
+
+	$('#playername').append(allcards);
+	$('#cardmaker').append(allcards);
+	$('#number').append(allcards);
+	$('#sport').append(allcards);
+	$('#grade').append(allcards);
 }
 
 
