@@ -6,8 +6,8 @@ console.log("ARE YOU EVEN HERE")
 
 
 function swapPage() {
-	$('#signupNlogin').toggle();
-	$('#adding').toggle();
+	$('#signupNlogin').hide();
+	$('#Adding').show().find('*').show();
 	get_cards();
 }
 
