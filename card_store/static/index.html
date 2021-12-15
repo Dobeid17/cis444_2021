@@ -221,9 +221,9 @@ input {
 
 
     <body>
-	   <div id="signupNlogin">
+	   <div class = "container"  id="signupNlogin">
 	   		<div class="form-container sign-up-container"> 
-		   	<h2>Create Account</h2>
+		   	<h1>Create Account</h1>
 	    		<form>
   				<label for="username">User Name:</label><br>
 				<input type="text" id="newUser" name="username"><br><br>
@@ -235,7 +235,7 @@ input {
 	   	
 
 	   		<div class="form-container sign-in-container">
-		   		<h2>Sign into your account.</h2>
+		   		<h1>Sign into your account.</h1>
 				<form>
          				<label for="username" id="username">Username:</label>
          				<input type="text" id="logUser" name="username"><br><br>
@@ -267,11 +267,11 @@ input {
                 const signInButton = document.getElementById('signIn');
                 const container = document.getElementById('signupNlogin');
 
-                signUpButton.addEventListener('click', () => {
+                signUpButton.addEventListener('click', () => {console.log("ARE WE HERE?!?!?")
                 container.classList.add("right-panel-active");
                 });
 
-                signInButton.addEventListener('click', () => {
+                signInButton.addEventListener('click', () => {console.log("ARE WE HERE2?!?!?")
                 container.classList.remove("right-panel-active");
 		});
 	</script>

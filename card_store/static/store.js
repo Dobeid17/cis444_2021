@@ -1,22 +1,9 @@
 var jwt = null
 
-$('#signupNlogin').show();
-$('#div:not(#signupNlogin)').hide()
+$('div:not(#signupNlogin)').hide()
+$('#signupNlogin').show().find('*').show();
 console.log("ARE YOU EVEN HERE")
-function cssTest() {
-const signUpButton = document.getElementById('signUp');
-const signInButton = document.getElementById('signIn');
-const container = document.getElementById('container');
 
-signUpButton.addEventListener('click', () => {
-	container.classList.add("right-panel-active");
-});
-
-signInButton.addEventListener('click', () => {
-	container.classList.remove("right-panel-active");
-});
-
-}
 
 function swapPage() {
 	$('#signupNlogin').toggle();
