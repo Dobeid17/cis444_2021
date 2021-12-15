@@ -215,67 +215,15 @@ input {
 </style>
     <head>
 	     <script src="https://code.jquery.com/jquery-3.6.0.js" 
-		     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
-
-		const signUpButton = document.getElementById('register');
-		const signInButton = document.getElementById('signIn');
-		const container = document.getElementById('signupNlogin');
-
-		signUpButton.addEventListener('click', () => {
-		container.classList.add("right-panel-active");
-		});
-
-		signInButton.addEventListener('click', () => {
-		container.classList.remove("right-panel-active");
-		});
-
-		 var list1 = [];
-       		 var list2 = [];
-        	 var list3 = [];
-        	 var list4 = [];
-        	 var list5 = [];
-
-        	 var n = 1;
-        	 var x = 0;
-
-        	 var add_to_list = document.getElementByID('show');
-        	 var newRow = add_to_list.insertRow(n);
-
-        	 list1[x] = document.getElementByID("playername").value;
-        	 list2[x] = document.getElementByID("cardmaker").value;
-        	 list3[x] = document.getElementByID("number").value;
-        	 list4[x] = document.getElementByID("sport").value;
-        	 list5[x] = document.getElementByID("grade").value;
-
-        	 var cel1 = newRow.insertCell(0);
-        	 var cel2 = newRow.insertCell(1);
-        	 var cel3 = newRow.insertCell(2);
-        	 var cel4 = newRow.insertCell(3);
-        	 var cel5 = newRow.insertCell(4);
-
-        	 cel1.innerHTML = list1[x];
-        	 cel2.innerHTML = list2[x];
-        	 cel3.innerHTML = list3[x];
-        	 cel4.innerHTML = list4[x];
-        	 cel5.innerHTML = list5[x];
-
-        	 n++;
-        	 x++;
-	
-
-
-	     </script>
+		     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
  </head>
 
 
     <body>
-	   <div class = "Welcome-page" id=signupNlogin>
-	   	<div class="container" id="container">
+	   <div id="signupNlogin">
 	   		<div class="form-container sign-up-container"> 
-	   		<div id="signingUp">
-		   	<h1>Create Account</h1>
-
+		   	<h2>Create Account</h2>
 	    		<form>
   				<label for="username">User Name:</label><br>
 				<input type="text" id="newUser" name="username"><br><br>
@@ -283,13 +231,11 @@ input {
 				<input type="password" id="newPass" name="password"> <br><br>
   				<input type="submit" value="Signup" onclick="return signup();">
 			</form>
-
 	    		</div>
-	   		</div>
+	   	
 
 	   		<div class="form-container sign-in-container">
-	   			<div id="loggingIn">
-		   		<h1>Sign into your account.</h1>
+		   		<h2>Sign into your account.</h2>
 				<form>
          				<label for="username" id="username">Username:</label>
          				<input type="text" id="logUser" name="username"><br><br>
@@ -298,64 +244,71 @@ input {
 					<input type="submit" value="Login" onclick="return login();">
 
         			</form>
-      	  			</div>
+      	  			
 	   		</div>
 
 	   		<div class="overlay-container">
 				<div class="overlay">
 					<div class="overlay-panel overlay-left">
 						<h1>Welcome Back!</h1>
-						<p>To keep connected with us please login with your personal info</p>
+						<p>Please log in</p>
 						<button class="ghost" id="signIn">Sign In</button>
 					</div>
 					<div class="overlay-panel overlay-right">
-						<h1>Hello, Friend!</h1>
-						<p>Enter your personal details and start journey with us</p>
+						<h1>New User?</h1>
+						<p>Dont have an account? Create one now!</p>
 						<button class="ghost" id="register">Sign Up</button>
 					</div>
 				</div>
 	   		</div>
-	   	</div>
 	   </div>
+	<script>
+		const signUpButton = document.getElementById('register');
+                const signInButton = document.getElementById('signIn');
+                const container = document.getElementById('signupNlogin');
+
+                signUpButton.addEventListener('click', () => {
+                container.classList.add("right-panel-active");
+                });
+
+                signInButton.addEventListener('click', () => {
+                container.classList.remove("right-panel-active");
+		});
+	</script>
+
 	  <div id="Adding">
 		  <h1>Lets add to your collection</h1>
 		  <form>
-			  <div>
-			  <label for="playername" id="player">Player Name:</label> 
-			  <input type="text" id="playername" name="name">
-			  <br><br>
-			  <label for="cardmaker" id="maker">Card Brand:</label>
-                          <input type="text" id="cardmaker" name="make">
-                          <br><br>
-			  <label for="number" id="num">Card Number:</label>
-                          <input type="text" id="number" name="n">
-                          <br><br>
-			  <label for="sport" id="cardsport">Sport:</label>
-                          <input type="text" id="sport" name="s">
-                          <br><br>
-			  <label for="grade" id="cardgrade">Grade:</label>
-                          <input type="text" id="grade" name="g">
-                          <br><br>
-			  <input type="button" value="Add Card" onclick=" addcard();">
+			  <div id="card-wrapper">
+			 
+			  	<div>
+			  	<label for="playername" id="player">Player Name:</label> 
+			  	<input type="text" id="playername" name="name">
+			  	<br><br>
+			  	<label for="cardmaker" id="maker">Card Brand:</label>
+                          	<input type="text" id="cardmaker" name="make">
+                          	<br><br>
+			  	<label for="number" id="num">Card Number:</label>
+                          	<input type="text" id="number" name="n">
+                          	<br><br>
+			  	<label for="sport" id="cardsport">Sport:</label>
+                          	<input type="text" id="sport" name="s">
+                          	<br><br>
+			  	<label for="grade" id="cardgrade">Grade:</label>
+                          	<input type="text" id="grade" name="g">
+                          	<br><br>
+			  	<input type="button" value="Add Card" onclick=" addcard();">
+			  	</div>
+			</div>
 		 </form>
 
+
+
+			<div id="dataTable_wrapper"></div>  
 	 </div>
+	
 
-	 <div class="show-cards">
-		 <table id="show">
-			
-				<tr>
-					<th>Player Name</th>
-					<th>Card Brand</th>
-					<th>Card Number</th>
-					<th>Sport</th>
-					<th>Grade</th>
-				</tr>
-			
-		</table>
-
-
-
+	
 
 <script src="/static/store.js"></script>
 

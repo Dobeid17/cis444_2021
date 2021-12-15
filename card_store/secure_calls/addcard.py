@@ -23,4 +23,4 @@ def handle_request():
     global_db_con.commit()
 
     added = True
-    return json_response(status=added)
+    return json_response(data = {'playername': playerName , 'cardmaker': cardMake , 'number':cardNumber , 'sport' : cardSport , 'grade': cardGrade})
